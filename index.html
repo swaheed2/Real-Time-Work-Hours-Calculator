@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/AdminLTE.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script> 
+        <script src="js/controllers.js"></script>  
+    </head>
+    <body ng-app='myApp'>
+        <br><br>
+        <div class= "container" ng-controller="MainCtrl"> 
+
+            <div class="row">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Realtime Work Hours Calculator</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="row row-centered">
+                            <div class="col-xs-6 col-centered">
+                                <div class="box box-success child">
+                                    <div class="box-header child">
+                                        <h3 class="box-title">Time In</h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <input 
+                                               type="number" 
+                                               ng-change="calculate()" 
+                                               onclick="this.value='';" 
+                                               ng-model="timeinH" 
+                                               placeholder="H" 
+                                               size="2" max="12">
+
+                                        <span style="font-size: 26px;"> : </span> 
+                                        <input 
+                                               type="number" 
+                                               ng-change="calculate()" 
+                                               onclick="this.value='';" 
+                                               ng-model="timeinM" 
+                                               placeholder="M" 
+                                               size="2" max="60"> 
+                                        <select id="timeinAMPM">
+                                            <option value="am">am</option>
+                                            <option value="pm">pm</option> 
+                                        </select>
+                                    </div>
+                                </div>  
+                            </div>
+                            <div class="col-xs-6 col-centered">
+                                <div class="box box-success child">
+                                    <div class="box-header child">
+                                        <h3 class="box-title">Lunch Start</h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <input 
+                                               type="number" 
+                                               ng-change="calculate()" 
+                                               onclick="this.value='';" 
+                                               ng-model="lstartH" 
+                                               placeholder="H" 
+                                               size="2" max="12"> 
+                                        <span style="font-size: 26px;"> : </span>
+                                        <input 
+                                               type="number" 
+                                               ng-change="calculate()" 
+                                               onclick="this.value='';" 
+                                               ng-model="lstartM" 
+                                               placeholder="M" 
+                                               size="2" max="60">
+                                        <select id="lunchstartAMPM">
+                                            <option value="pm">pm</option> 
+                                            <option value="am">am</option> 
+                                        </select>
+                                    </div>
+                                </div>   
+                            </div>
+                            <div class="col-xs-6 col-centered">
+                                <div class="box box-success child">
+                                    <div class="box-header child">
+                                        <h3 class="box-title">Lunch End</h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <input 
+                                               type="number" 
+                                               ng-change="calculate()" 
+                                               onclick="this.value='';" 
+                                               ng-model="lendH" 
+                                               placeholder="H" 
+                                               size="2" max="12">
+                                        <span style="font-size: 26px;"> : </span>
+                                        <input 
+                                               type="number" 
+                                               ng-change="calculate()" 
+                                               onclick="this.value='';"
+                                               ng-model="lendM" 
+                                               placeholder="M" 
+                                               size="2" max="60">
+                                        <select id="lunchendAMPM">
+                                            <option value="pm">pm</option> 
+                                            <option value="am">am</option> 
+                                        </select> 
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="col-xs-6 col-centered">
+                                <div class="box box-success child">
+                                    <div class="box-header child">
+                                        <h3 class="box-title">Time Out</h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <input 
+                                               type="number" 
+                                               ng-change="calculate()" 
+                                               onclick="this.value='';" 
+                                               ng-model="timeoutH" 
+                                               placeholder="H" 
+                                               size="2" max="12">
+                                        <span style="font-size: 26px;"> : </span>
+                                        <input 
+                                               type="number" 
+                                               ng-change="calculate()" 
+                                               onclick="this.value='';" 
+                                               ng-model="timeoutM" 
+                                               placeholder="M" 
+                                               size="2" max="60">
+                                        <select id="timeoutAMPM">
+                                            <option value="pm">pm</option> 
+                                            <option value="am">am</option> 
+                                        </select>
+                                    </div>
+                                </div>  
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+
+            <div class="row" >
+                <div class="box box-success">
+                    <div class="box-header with-border text-center">
+                        <h1 class="">{{ total }}</h1>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>   
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> 
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+        <script src="js/app.js"></script>    
+    </body>
+</html>

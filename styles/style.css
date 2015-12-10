@@ -1,0 +1,44 @@
+body{
+    background: #011323;
+    color: black;   
+}
+
+.box-header.child{
+    background: rgba(0, 166, 90, 0.44);
+    color: black;
+    border: none;
+}
+
+.box.box-success.child{
+    border-top: none;
+}
+
+input[type="number"] {
+    width:50px;
+    height: 50px;
+    font-size: 30px;
+    text-align: center;
+    border: none;
+    border-bottom: thin solid #000;
+}
+
+input:focus{
+    outline: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block; 
+    /* reset the text-align */
+    text-align:center;  
+}
