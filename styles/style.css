@@ -2,7 +2,9 @@ body{
     background: #011323;
     color: black;   
 }
-
+#main-container{
+    margin-top: 3%;
+}
 .box-header.child{
     background: rgba(0, 166, 90, 0.44);
     color: black;
