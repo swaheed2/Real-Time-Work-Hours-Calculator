@@ -22,7 +22,7 @@ myControllers.controller('MainCtrl', function($scope) {
         var tinM    = $scope.timeinM;
         if($scope.timeinAMPM == "pm" && tinH < 12){
             tinH += 12;
-            console.log("timein yes : " + tinH + " " + $scope.timeinAMPM);
+            //console.log("timein yes : " + tinH + " " + $scope.timeinAMPM);
         }
         tinDate.setHours(tinH,tinM);  
         //--------Lunch Start-------------------------------------------------------
@@ -31,7 +31,7 @@ myControllers.controller('MainCtrl', function($scope) {
         var lstM    = $scope.lstartM; 
         if($('#lunchstartAMPM').val() == "pm" && lstH < 12){ 
             lstH += 12;
-            console.log("lunchstart yes : " + lstH + " " + $scope.timeinAMPM);
+            //console.log("lunchstart yes : " + lstH + " " + $scope.timeinAMPM);
         } 
         lstartDate.setHours(lstH,lstM);  
         //--------Lunch End --------------------------------------------------------
@@ -40,7 +40,7 @@ myControllers.controller('MainCtrl', function($scope) {
         var lenM    = $scope.lendM; 
         if($('#lunchendAMPM').val() == "pm" && lenH < 12){ 
             lenH += 12;
-            console.log("timeend yes : " + lenH + " " + $scope.timeinAMPM);
+            //console.log("timeend yes : " + lenH + " " + $scope.timeinAMPM);
         } 
         lendDate.setHours(lenH,lenM);  
         //---------------------------------------------------------------------------
@@ -50,7 +50,7 @@ myControllers.controller('MainCtrl', function($scope) {
         if($('#timeoutAMPM').val() == "pm"  && toutH < 12){
             console.log("value: " + $('#timeoutAMPM').val());
             toutH += 12;
-            console.log("timeout yes : " + toutH + " " + $scope.timeinAMPM);
+           // console.log("timeout yes : " + toutH + " " + $scope.timeinAMPM);
         }
         toutDate.setHours(toutH,toutM);  
         //---------------------------------------------------------------------------
@@ -63,10 +63,7 @@ myControllers.controller('MainCtrl', function($scope) {
         , seconds = parseInt((diff/1000)%60)
         , minutes = parseInt((diff/(1000*60))%60)
         , hours = parseInt((diff/(1000*60*60))%24);
-
-        hours = (hours < 10) ? "" + hours : hours;
-        minutes = (minutes < 10) ? "" + minutes : minutes;
-        seconds = (seconds < 10) ? "" + seconds : seconds;
+ 
 
         $scope.total = "" + hours  + " hours and " + minutes + " minutes";
     }

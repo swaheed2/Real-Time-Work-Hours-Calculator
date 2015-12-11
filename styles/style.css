@@ -24,8 +24,8 @@ input[type="number"] {
 select {
     width:50px;
     height: 40px; 
-    border: none;
-    background: white;
+    border: none !important;
+    background: white !important;
 }
 
 input:focus{
