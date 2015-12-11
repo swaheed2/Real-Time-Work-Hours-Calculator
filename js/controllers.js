@@ -4,12 +4,15 @@ myControllers.controller('MainCtrl', function($scope) {
 
     $scope.timeinH = 8;
     $scope.timeinM = 0;
-    $scope.lstartH = 12;
+    $scope.lstartH = 1;
     $scope.lstartM = 0;
-    $scope.lendH = 1;
+    $scope.lendH = 2;
     $scope.lendM = 0;
-    $scope.timeoutH = 4;
-    $scope.timeoutM = 0;
+    $scope.timeoutH = 5;
+    $scope.timeoutM = 30;
+    
+    $scope.timeinAMPM = "am"
+    
     $scope.total = " ";
 
     $scope.calculate = function(){
@@ -17,8 +20,9 @@ myControllers.controller('MainCtrl', function($scope) {
         var tinDate = new Date(); 
         var tinH    = $scope.timeinH;
         var tinM    = $scope.timeinM;
-        if($('#timeinAMPM').val() == "pm" && tinH < 12){
-            tinH + 12;
+        if($scope.timeinAMPM == "pm" && tinH < 12){
+            tinH += 12;
+            console.log("timein yes : " + tinH + " " + $scope.timeinAMPM);
         }
         tinDate.setHours(tinH,tinM);  
         //--------Lunch Start-------------------------------------------------------
@@ -27,8 +31,8 @@ myControllers.controller('MainCtrl', function($scope) {
         var lstM    = $scope.lstartM; 
         if($('#lunchstartAMPM').val() == "pm" && lstH < 12){ 
             lstH += 12;
-        }
-        console.log("start: " + lstH + ":" + lstM);
+            console.log("lunchstart yes : " + lstH + " " + $scope.timeinAMPM);
+        } 
         lstartDate.setHours(lstH,lstM);  
         //--------Lunch End --------------------------------------------------------
         var lendDate = new Date(); 
@@ -36,9 +40,8 @@ myControllers.controller('MainCtrl', function($scope) {
         var lenM    = $scope.lendM; 
         if($('#lunchendAMPM').val() == "pm" && lenH < 12){ 
             lenH += 12;
-            console.log("24 hour lunch end: " + lenH);
-        }
-        console.log("end: " + lenH + ":" + lenM);
+            console.log("timeend yes : " + lenH + " " + $scope.timeinAMPM);
+        } 
         lendDate.setHours(lenH,lenM);  
         //---------------------------------------------------------------------------
         var toutDate = new Date(); 
@@ -47,6 +50,7 @@ myControllers.controller('MainCtrl', function($scope) {
         if($('#timeoutAMPM').val() == "pm"  && toutH < 12){
             console.log("value: " + $('#timeoutAMPM').val());
             toutH += 12;
+            console.log("timeout yes : " + toutH + " " + $scope.timeinAMPM);
         }
         toutDate.setHours(toutH,toutM);  
         //---------------------------------------------------------------------------

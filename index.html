@@ -43,8 +43,8 @@
                                                ng-model="timeinM" 
                                                placeholder="M" 
                                                size="2" max="60"> 
-                                        <select id="timeinAMPM">
-                                            <option value="am">am</option>
+                                        <select id="timeinAMPM" ng-change="calculate()" ng-model="timeinAMPM">
+                                            <option value="am" >am</option>
                                             <option value="pm">pm</option> 
                                         </select>
                                     </div>

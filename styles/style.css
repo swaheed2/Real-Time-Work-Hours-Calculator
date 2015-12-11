@@ -21,6 +21,11 @@ input[type="number"] {
     border: none;
     border-bottom: thin solid #000;
 }
+select {
+    width:50px;
+    height: 40px; 
+    border: none
+}
 
 input:focus{
     outline: 0;
