@@ -2,6 +2,8 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Real-Time Work Hours Calculator</title>
+        <meta name="description" content="Calculate hours worked on any device within seconds.">
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -11,8 +13,13 @@
         <script src="js/controllers.js"></script>  
     </head>
     <body ng-app='myApp'> 
-        <div class= "container" id="main-container" ng-controller="MainCtrl">  
-            <div class="row">
+        <div class= "container" id="main-container" ng-controller="MainCtrl">
+            <div class="links row text-right" style="color:#d1d1d1">
+                <a href="#" >Advanced</a>
+                <span> | </span>
+                <a href="https://github.com/swaheed2/real-time-work-hours-calculator" >Source</a>
+            </div>
+            <div class="row"> 
                 <div class="box box-success">
                     <div class="box-header with-border">
                         <h3 class="box-title">Real-Time Work Hours Calculator</h3>

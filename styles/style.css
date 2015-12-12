@@ -50,3 +50,6 @@ input::-webkit-inner-spin-button {
     /* reset the text-align */
     text-align:center;  
 }
+.links a{
+    padding: 0 2px 0 2px;
+}
