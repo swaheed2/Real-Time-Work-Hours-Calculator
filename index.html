@@ -37,7 +37,7 @@
     <body ng-app='myApp'> 
         <div class= "container" id="main-container" ng-controller="MainCtrl">
             <div class="links row text-right" style="color:#d1d1d1">
-                <a href="#" >Advanced</a>
+                <a href="#" ng-click="advance=true" >Advanced</a>
                 <span> | </span>
                 <a href="https://github.com/swaheed2/real-time-work-hours-calculator" >Source</a>
             </div>
@@ -70,7 +70,7 @@
                                                ng-model="timeinM" 
                                                placeholder="M" 
                                                size="2" max="60"> 
-                                        <select id="timeinAMPM" ng-change="calculate()" ng-model="timeinAMPM">
+                                        <select ng-change="calculate()" ng-model="timeinAMPM">
                                             <option value="am" >am</option>
                                             <option value="pm">pm</option> 
                                         </select>
@@ -98,7 +98,7 @@
                                                ng-model="lstartM" 
                                                placeholder="M" 
                                                size="2" max="60">
-                                        <select id="lunchstartAMPM">
+                                        <select ng-model="lunchstartAMPM">
                                             <option value="pm">pm</option> 
                                             <option value="am">am</option> 
                                         </select>
@@ -126,7 +126,7 @@
                                                ng-model="lendM" 
                                                placeholder="M" 
                                                size="2" max="60">
-                                        <select id="lunchendAMPM">
+                                        <select ng-model="lunchendAMPM">
                                             <option value="pm">pm</option> 
                                             <option value="am">am</option> 
                                         </select> 
@@ -154,7 +154,7 @@
                                                ng-model="timeoutM" 
                                                placeholder="M" 
                                                size="2" max="60">
-                                        <select id="timeoutAMPM">
+                                        <select ng-model="timeoutAMPM">
                                             <option value="pm">pm</option> 
                                             <option value="am">am</option> 
                                         </select>
@@ -163,19 +163,107 @@
                             </div>
 
                         </div>
-                    </div>
-                    <!-- /.box-body -->
+                    </div> <!-- /.box-body --> 
                 </div>
-            </div>
-
+            </div>   
             <div class="row" >
                 <div class="box box-success">
-                    <div class="box-header with-border text-center">
+                    <div class="box-header with-border text-center" style="padding: 0px;">
                         <h1 class="">{{ total }}</h1>
                     </div>
                 </div>
             </div>
+            <div class="row text-center" ng-if="advance">
+                <div class="col col-xs-6 col-sm-6">
+                    <button 
+                            type="button"
+                            style="display: block; width: 100%;"
+                            class="btn bg-red btn-flat btn-block" 
+                            data-toggle="tooltip" data-placement="top" 
+                            title="save times">
+                        Save Times
+                    </button>
+                </div>
+                <div class="col col-xs-6 col-sm-6">
+                    <button 
+                            type="button" 
+                            style="display: block; width: 100%;"
+                            class="btn bg-red btn-flat btn-block" 
+                            data-toggle="tooltip" data-placement="top"
+                            ng-click="addRow()"
+                            title="add these hours to time tip below">
+                        Add Time
+                    </button>
+                </div>
+            </div>
+            <br>
+            <div class="row text-center" id="summary" ng-if="advance">
+                <div class="col col-xs-6 col-sm-3 nopadding">
+                    <span  
+                          style="display: inline-block; width:45%"
+                          class="bg-purple btn-flat bottom-span" >
+                        Rate
+                    </span>
+                    <input 
+                           type="number"  
+                           id="rate"
+                           class="pay-input"
+                           onclick="this.value='';" 
+                           ng-model="rate" 
+                           placeholder=20
+                           size="3" max="100">
+                    <script>document.getElementById("rate").value = 20;</script>
+                </div>
+                <div class="col col-xs-6 col-sm-3 nopadding">
+                    <span  
+                          style="display: inline-block; width:45%"
+                          class="bg-purple btn-flat bottom-span">
+                        Tax
+                    </span>
+                    <input 
+                           type="number"  
+                           class="pay-input"
+                           onclick="this.value='';" 
+                           ng-model="tax" 
+                           placeholder="%" 
+                           size="0" max="100">
+                </div>
+                <div class="col col-xs-6 col-sm-3 nopadding">
+                    <span    
+                          style="position:relative; bottom:0px"
+                          class="bg-maroon btn-flat btn-block bottom-span"  >
+                        Total Hours: 
+                    </span>
+                </div>
+                <div class="col col-xs-6 col-sm-3 nopadding" style="padding-left:5px !important">
+                    <span    
+                          style="position:relative; bottom:0px"
+                          class="bg-maroon btn-flat btn-block bottom-span"  >
+                        Pay: 
+                    </span>
+                </div>
+            </div> 
+            <br>
+            <div class="row" ng-if="advance">
+                <div class="box box-success">
+                    <div class="box-header with-border text-center">
+                        <table id="ttable" class="table table-bordered">
+                            <thead class="bg-olive">
+                                <tr>
+                                    <td>Time In</td> 
+                                    <td>Lunch Start</td> 
+                                    <td>Lunch End</td> 
+                                    <td>Time Out</td>
+                                </tr>
+                            </thead>
+                            <tbody class=""> 
+                            </tbody>
+                        </table> 
+                    </div>
+                </div>
+            </div>
 
+            <br><br>
 
         </div>   
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> 

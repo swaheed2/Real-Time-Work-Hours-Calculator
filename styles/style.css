@@ -10,7 +10,9 @@ body{
     color: black;
     border: none;
 }
-
+.bg-olive{
+    background: rgba(0, 166, 90, 0.44);
+}
 .box.box-success.child{
     border-top: none;
 }
@@ -22,12 +24,22 @@ input[type="number"] {
     text-align: center;
     border: none;
     border-bottom: thin solid #000;
+
+}
+.pay-input{
+    width:50% !important;
+    height: 44px !important;
+    font-size: 20px !important;  
+}
+.bottom-span{
+    padding:8px 10px 8px 10px;position:relative; bottom:0px; 
 }
 select {
     width:50px;
     height: 40px; 
     border: none !important;
     background: white !important;
+
 }
 
 input:focus{
@@ -52,4 +64,13 @@ input::-webkit-inner-spin-button {
 }
 .links a{
     padding: 0 2px 0 2px;
+}
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+#summary{
+    font-size:20px;
+    font-style: bold;
+    
 }

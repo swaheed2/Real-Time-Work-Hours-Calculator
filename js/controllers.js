@@ -1,7 +1,9 @@
 var myControllers = angular.module('myApp.myControllers', []);
 
 myControllers.controller('MainCtrl', function($scope) {
-
+    
+    $scope.advance = false;
+    
     $scope.timeinH = 8;
     $scope.timeinM = 0;
     $scope.lstartH = 1;
@@ -10,9 +12,13 @@ myControllers.controller('MainCtrl', function($scope) {
     $scope.lendM = 0;
     $scope.timeoutH = 5;
     $scope.timeoutM = 30;
-    
-    $scope.timeinAMPM = "am"
-    
+
+    $scope.timeinAMPM = "am";
+    $scope.lunchstartAMPM = "pm";
+    $scope.lunchendAMPM = "pm";
+    $scope.timeoutAMPM = "pm";
+
+
     $scope.total = " ";
 
     $scope.calculate = function(){
@@ -29,7 +35,7 @@ myControllers.controller('MainCtrl', function($scope) {
         var lstartDate = new Date(); 
         var lstH    = $scope.lstartH;
         var lstM    = $scope.lstartM; 
-        if($('#lunchstartAMPM').val() == "pm" && lstH < 12){ 
+        if($scope.lunchstartAMPM == "pm" && lstH < 12){ 
             lstH += 12;
             //console.log("lunchstart yes : " + lstH + " " + $scope.timeinAMPM);
         } 
@@ -38,7 +44,7 @@ myControllers.controller('MainCtrl', function($scope) {
         var lendDate = new Date(); 
         var lenH    = $scope.lendH;
         var lenM    = $scope.lendM; 
-        if($('#lunchendAMPM').val() == "pm" && lenH < 12){ 
+        if($scope.lunchendAMPM == "pm" && lenH < 12){ 
             lenH += 12;
             //console.log("timeend yes : " + lenH + " " + $scope.timeinAMPM);
         } 
@@ -47,10 +53,10 @@ myControllers.controller('MainCtrl', function($scope) {
         var toutDate = new Date(); 
         var toutH    = $scope.timeoutH;
         var toutM    = $scope.timeoutM; 
-        if($('#timeoutAMPM').val() == "pm"  && toutH < 12){
-            console.log("value: " + $('#timeoutAMPM').val());
+        if($scope.timeoutAMPM == "pm"  && toutH < 12){
+            console.log("value: " + $scope.timeoutAMPM);
             toutH += 12;
-           // console.log("timeout yes : " + toutH + " " + $scope.timeinAMPM);
+            // console.log("timeout yes : " + toutH + " " + $scope.timeinAMPM);
         }
         toutDate.setHours(toutH,toutM);  
         //---------------------------------------------------------------------------
@@ -63,14 +69,43 @@ myControllers.controller('MainCtrl', function($scope) {
         , seconds = parseInt((diff/1000)%60)
         , minutes = parseInt((diff/(1000*60))%60)
         , hours = parseInt((diff/(1000*60*60))%24);
- 
+
 
         $scope.total = "" + hours  + " hours and " + minutes + " minutes";
+
+        $scope.addRow = function(){
+            console.log("add row");
+            var table = $('#ttable tbody');
+            var rowText = '<tr>';
+            
+            rowText    += '<td>' + $scope.timeinH  + ':';  
+            if($scope.timeinM.toString().length == 1)
+                rowText    += '0';
+            rowText    += $scope.timeinM   + $scope.timeinAMPM      + '</td>';
+            
+            rowText    += '<td>' + $scope.lstartH  + ':';  
+            if($scope.lstartM.toString().length == 1)
+                rowText    += '0';
+            rowText    += $scope.lstartM   + $scope.lunchstartAMPM  + '</td>';
+            
+            rowText    += '<td>' + $scope.lendH  + ':';  
+            if($scope.lendH.toString().length == 1)
+                rowText    += '0';
+            rowText    += $scope.lendM     + $scope.lunchendAMPM    + '</td>';
+            
+            rowText    += '<td>' + $scope.timeoutH  + ':';  
+            if($scope.timeoutM.toString().length == 1)
+                rowText    += '0';
+            rowText    += $scope.timeoutM  + $scope.timeoutAMPM     + '</td>';
+            
+            rowText    += '</tr>'
+            table.append(rowText); 
+        }
     }
     angular.element(document).ready(function () {
         $scope.calculate();
         $scope.$apply();
-        console.log("init")
+        console.log("init");
     });
-    
+
 });
