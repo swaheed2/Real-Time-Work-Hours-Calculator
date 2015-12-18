@@ -1,9 +1,9 @@
 var myControllers = angular.module('myApp.myControllers', []);
 
 myControllers.controller('MainCtrl', function($scope) {
-    
-    $scope.advance = false;
-    
+
+    $scope.advance = true;
+
     $scope.timeinH = 8;
     $scope.timeinM = 0;
     $scope.lstartH = 1;
@@ -20,6 +20,16 @@ myControllers.controller('MainCtrl', function($scope) {
 
 
     $scope.total = " ";
+    $scope.calH = 0;
+    $scope.calcM = 0;
+
+
+    $scope.rate = 20;
+    $scope.tax  = 13;
+    $scope.totalHours = 0;
+    $scope.totalPay   = ($scope.totalHours * $scope.rate) - (($scope.totalHours * $scope.rate)*$scope.tax/100);
+
+
 
     $scope.calculate = function(){
         console.log("calc func")
@@ -70,38 +80,55 @@ myControllers.controller('MainCtrl', function($scope) {
         , minutes = parseInt((diff/(1000*60))%60)
         , hours = parseInt((diff/(1000*60*60))%24);
 
+        $scope.calH = hours;
+        $scope.calcM = minutes/60;
 
         $scope.total = "" + hours  + " hours and " + minutes + " minutes";
 
-        $scope.addRow = function(){
-            console.log("add row");
-            var table = $('#ttable tbody');
-            var rowText = '<tr>';
-            
-            rowText    += '<td>' + $scope.timeinH  + ':';  
-            if($scope.timeinM.toString().length == 1)
-                rowText    += '0';
-            rowText    += $scope.timeinM   + $scope.timeinAMPM      + '</td>';
-            
-            rowText    += '<td>' + $scope.lstartH  + ':';  
-            if($scope.lstartM.toString().length == 1)
-                rowText    += '0';
-            rowText    += $scope.lstartM   + $scope.lunchstartAMPM  + '</td>';
-            
-            rowText    += '<td>' + $scope.lendH  + ':';  
-            if($scope.lendH.toString().length == 1)
-                rowText    += '0';
-            rowText    += $scope.lendM     + $scope.lunchendAMPM    + '</td>';
-            
-            rowText    += '<td>' + $scope.timeoutH  + ':';  
-            if($scope.timeoutM.toString().length == 1)
-                rowText    += '0';
-            rowText    += $scope.timeoutM  + $scope.timeoutAMPM     + '</td>';
-            
-            rowText    += '</tr>'
-            table.append(rowText); 
-        }
     }
+    $scope.calcRate = function(rate){
+        $scope.rate = rate;
+        $scope.totalPay   = ($scope.totalHours * $scope.rate) - (($scope.totalHours * $scope.rate)*$scope.tax/100);
+        console.log($scope.rate);
+    }
+    $scope.calcTax = function(tax){
+        $scope.tax = tax;
+        $scope.totalPay   = ($scope.totalHours * $scope.rate) - (($scope.totalHours * $scope.rate)*$scope.tax/100);
+        console.log($scope.tax);
+    }
+    $scope.addRow = function(){
+        console.log("add row");
+        var table = $('#ttable tbody');
+        var rowText = '<tr>';
+
+        rowText    += '<td>' + $scope.timeinH  + ':';  
+        if($scope.timeinM.toString().length == 1)
+            rowText    += '0';
+        rowText    += $scope.timeinM   + $scope.timeinAMPM      + '</td>';
+
+        rowText    += '<td>' + $scope.lstartH  + ':';  
+        if($scope.lstartM.toString().length == 1)
+            rowText    += '0';
+        rowText    += $scope.lstartM   + $scope.lunchstartAMPM  + '</td>';
+
+        rowText    += '<td>' + $scope.lendH  + ':';  
+        if($scope.lendH.toString().length == 1)
+            rowText    += '0';
+        rowText    += $scope.lendM     + $scope.lunchendAMPM    + '</td>';
+
+        rowText    += '<td>' + $scope.timeoutH  + ':';  
+        if($scope.timeoutM.toString().length == 1)
+            rowText    += '0';
+        rowText    += $scope.timeoutM  + $scope.timeoutAMPM     + '</td>';
+
+        rowText    += '</tr>'
+        table.append(rowText); 
+
+        $scope.totalHours += $scope.calH + $scope.calcM;
+        $scope.calcRate();
+    }
+
+
     angular.element(document).ready(function () {
         $scope.calculate();
         $scope.$apply();
