@@ -98,7 +98,7 @@
                                                ng-model="lstartM" 
                                                placeholder="M" 
                                                size="2" max="60">
-                                        <select ng-model="lunchstartAMPM">
+                                        <select ng-change="calculate()" ng-model="lunchstartAMPM">
                                             <option value="pm">pm</option> 
                                             <option value="am">am</option> 
                                         </select>
@@ -126,7 +126,7 @@
                                                ng-model="lendM" 
                                                placeholder="M" 
                                                size="2" max="60">
-                                        <select ng-model="lunchendAMPM">
+                                        <select ng-change="calculate()" ng-model="lunchendAMPM">
                                             <option value="pm">pm</option> 
                                             <option value="am">am</option> 
                                         </select> 
@@ -154,7 +154,7 @@
                                                ng-model="timeoutM" 
                                                placeholder="M" 
                                                size="2" max="60">
-                                        <select ng-model="timeoutAMPM">
+                                        <select ng-change="calculate()" ng-model="timeoutAMPM">
                                             <option value="pm">pm</option> 
                                             <option value="am">am</option> 
                                         </select>
