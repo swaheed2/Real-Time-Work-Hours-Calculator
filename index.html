@@ -149,7 +149,7 @@
                                         <span style="font-size: 26px;"> : </span>
                                         <input 
                                                type="number" 
-                                               ng-change="calculate()" 
+                                               ng-change="calculate();" 
                                                onclick="this.value='';" 
                                                ng-model="timeoutM" 
                                                placeholder="M" 
@@ -161,7 +161,30 @@
                                     </div>
                                 </div>  
                             </div>
-
+                            <div 
+                                 style="position:absolite; bottom:0 !important; 
+                                        left:0 !important; padding-left:10px;
+                                        padding-bottom: 0px;"
+                                 class="text-left">
+                                <button 
+                                        type="button"
+                                        style=""
+                                        ng-click="saveCurrentHours()"
+                                        class="btn btn-default btn-xs" 
+                                        data-toggle="tooltip" data-placement="top" 
+                                        title="save times">
+                                    Set As Default
+                                </button>
+                                <button 
+                                        type="button" 
+                                        style="width:100px;"
+                                        class="btn btn-default btn-xs"
+                                        data-toggle="tooltip" data-placement="top"
+                                        ng-click="addRow()"
+                                        title="add these hours to time tip below">
+                                    Add Time
+                                </button>
+                            </div>
                         </div>
                     </div> <!-- /.box-body --> 
                 </div>
@@ -172,33 +195,7 @@
                         <h1 class="">{{ total }}</h1>
                     </div>
                 </div>
-            </div>
-            <div class="row text-center" ng-if="advance">
-                <div 
-                     style="padding: 0 5px 0 0 !important;margin: 0 !important;"
-                     class="col col-xs-6 col-sm-6 ">
-                    <button 
-                            type="button"
-                            style="display: block; width: 100%;"
-                            class="btn btn-default btn-flat btn-block" 
-                            data-toggle="tooltip" data-placement="top" 
-                            title="save times">
-                        Save Times
-                    </button>
-                </div>
-                <div class="col col-xs-6 col-sm-6 nopadding">
-                    <button 
-                            type="button" 
-                            style="display: block; width: 100%;"
-                            class="btn btn-default btn-flat btn-block" 
-                            data-toggle="tooltip" data-placement="top"
-                            ng-click="addRow()"
-                            title="add these hours to time tip below">
-                        Add Time
-                    </button>
-                </div>
-            </div>
-            <br>
+            </div> 
             <div class="row text-center" id="summary" ng-if="advance">
                 <div class="col col-xs-6 col-sm-3 nopadding">
                     <span  
@@ -208,9 +205,9 @@
                     </span>
                     <input 
                            type="number"   
-                           ng-model="rate"
+                           ng-model="$parent.rate"
                            class="pay-input"
-                           ng-change="calcRate(rate)"
+                           ng-change="calcRate()"
                            onclick="this.value='';"   
                            size="3" max="100"> 
                 </div>
@@ -223,10 +220,9 @@
                     <input 
                            type="number"  
                            class="pay-input"
-                           ng-model="tax"
-                           onclick="this.value='';"
-                           ng-change="calcTax(tax)" 
-                           placeholder="%" 
+                           ng-change="calcTax()"
+                           ng-model="$parent.tax"
+                           onclick="this.value='';"  
                            size="0" max="100">
                 </div>
                 <div class="col col-xs-6 col-sm-3 nopadding">
@@ -255,6 +251,7 @@
                                     <td>Lunch Start</td> 
                                     <td>Lunch End</td> 
                                     <td>Time Out</td>
+                                    <td>Hours</td>
                                 </tr>
                             </thead>
                             <tbody class=""> 
@@ -263,7 +260,6 @@
                     </div>
                 </div>
             </div>
-
             <br><br>
 
         </div>   

@@ -11,7 +11,9 @@ myControllers.controller('MainCtrl', function($scope) {
     $scope.lendH = 2;
     $scope.lendM = 0;
     $scope.timeoutH = 5;
-    $scope.timeoutM = 30;
+    $scope.timeoutM = 0;
+    $scope.rate = 20;
+    $scope.tax  = 13;
 
     $scope.timeinAMPM = "am";
     $scope.lunchstartAMPM = "pm";
@@ -23,10 +25,8 @@ myControllers.controller('MainCtrl', function($scope) {
     $scope.calH = 0;
     $scope.calcM = 0;
 
-
-    $scope.rate = 20;
-    $scope.tax  = 13;
     $scope.totalHours = 0;
+    $scope.tableHours = 0;
     $scope.totalPay   = ($scope.totalHours * $scope.rate) - (($scope.totalHours * $scope.rate)*$scope.tax/100);
 
 
@@ -85,16 +85,8 @@ myControllers.controller('MainCtrl', function($scope) {
 
         $scope.total = "" + hours  + " hours and " + minutes + " minutes";
 
-    }
-    $scope.calcRate = function(rate){
-        $scope.rate = rate;
+        $scope.calcTotalHours(false);
         $scope.totalPay   = ($scope.totalHours * $scope.rate) - (($scope.totalHours * $scope.rate)*$scope.tax/100);
-        console.log($scope.rate);
-    }
-    $scope.calcTax = function(tax){
-        $scope.tax = tax;
-        $scope.totalPay   = ($scope.totalHours * $scope.rate) - (($scope.totalHours * $scope.rate)*$scope.tax/100);
-        console.log($scope.tax);
     }
     $scope.addRow = function(){
         console.log("add row");
@@ -121,15 +113,100 @@ myControllers.controller('MainCtrl', function($scope) {
             rowText    += '0';
         rowText    += $scope.timeoutM  + $scope.timeoutAMPM     + '</td>';
 
+        rowText    += '<td>' + ($scope.calH + $scope.calcM) + '</td>';
+
         rowText    += '</tr>'
         table.append(rowText); 
 
-        $scope.totalHours += $scope.calH + $scope.calcM;
+        //clear current times
+        $scope.timeinH = 0;
+        $scope.timeinM = 0;
+        $scope.lstartH = 0;
+        $scope.lstartM = 0;
+        $scope.lendH = 0;
+        $scope.lendM = 0;
+        $scope.timeoutH = 0;
+        $scope.timeoutM = 0;
+
+        // add to table hours
+        $scope.tableHours += $scope.calH + $scope.calcM;
+
+        //reset
+        $scope.calH = 0;
+        $scope.calcM = 0;
+
+
+        $scope.calcTotalHours(true);
+        console.log("table hours: " + $scope.tableHours);
         $scope.calcRate();
+        console.log("Rate: " + $scope.rate);
+    }
+    $scope.calcTotalHours = function(t) {
+        if(t === true){ 
+            // console.log("table hours: " + $scope.tableHours);
+            $scope.tableHours += $scope.calH + ($scope.calcM);
+        }
+        else{
+            console.log("table hours inside else calcTotalHours:" + $scope.tableHours);
+            $scope.totalHours = $scope.tableHours + $scope.calH + $scope.calcM;
+        } 
     }
 
+    $scope.calcRate = function(){
+        console.log("rate in calcRate: " +  $scope.rate); 
+        $scope.totalPay   = ($scope.totalHours * $scope.rate) - (($scope.totalHours * $scope.rate)*$scope.tax/100);
+    }
+    $scope.calcTax = function(){ 
+        $scope.totalPay   = ($scope.totalHours * $scope.rate) - (($scope.totalHours * $scope.rate)*$scope.tax/100);
+        console.log($scope.tax);
+    }
+    $scope.saveCurrentHours = function(){
+        console.log("saving hours");
+        localStorage.setItem("timeinH",$scope.timeinH);
+        localStorage.setItem("timeinM",$scope.timeinM);
+        localStorage.setItem("lstartH",$scope.lstartH);
+        localStorage.setItem("lstartM",$scope.lstartM);
+        localStorage.setItem("lendH",$scope.lendH);
+        localStorage.setItem("lendM",$scope.lendM);
+        localStorage.setItem("timeoutH",$scope.timeoutH);
+        localStorage.setItem("timeoutM",$scope.timeoutM); 
+        localStorage.setItem("rate",$scope.rate);
+        localStorage.setItem("tax",$scope.tax); 
 
+        console.log("saving hours: " + localStorage.getItem("tax"));
+        location.reload();
+    }
     angular.element(document).ready(function () {
+        if(localStorage.getItem("timeinH")  !== null){
+            $scope.timeinH = parseInt(localStorage.getItem("timeinH"));
+        }
+        if(localStorage.getItem("timeinM")  !== null){
+            $scope.timeinM = parseInt(localStorage.getItem("timeinM"));
+        }
+        if(localStorage.getItem("lstartH")  !== null){
+            $scope.lstartH = parseInt(localStorage.getItem("lstartH"));
+        }
+        if(localStorage.getItem("lstartM")  !== null){
+            $scope.lstartM = parseInt(localStorage.getItem("lstartM"));
+        }
+        if(localStorage.getItem("lendH")  !== null){
+            $scope.lendH = parseInt(localStorage.getItem("lendH"));
+        }
+        if(localStorage.getItem("lendM")  !== null){
+            $scope.lendM = parseInt(localStorage.getItem("lendM"));
+        }
+        if(localStorage.getItem("timeoutH")  !== null){
+            $scope.timeoutH = parseInt(localStorage.getItem("timeoutH"));
+        }
+        if(localStorage.getItem("timeoutM")  !== null){
+            $scope.timeoutM = parseInt(localStorage.getItem("timeoutM"));
+        }
+        if(localStorage.getItem("rate")  !== null){
+            $scope.rate = parseInt(localStorage.getItem("rate"));
+        }
+        if(localStorage.getItem("tax")  !== null){
+            $scope.tax = parseInt(localStorage.getItem("tax"));
+        }
         $scope.calculate();
         $scope.$apply();
         console.log("init");
