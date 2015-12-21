@@ -2,4 +2,4 @@
 
 Calculate hours worked on any device within seconds.
 
-http://swaheed2.github.io/real-time-work-hours-calculator/
+http://swaheed2.github.io/Real-Time-Work-Hours-Calculator/
