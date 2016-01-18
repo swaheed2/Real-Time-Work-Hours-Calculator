@@ -1,5 +1,7 @@
-# Real-Time Work Hours Calculator
+# Real-Time Work Hours Calculator Made With AngularJS
 
 Calculate hours worked on any device within seconds.
 
-http://swaheed2.github.io/real-time-work-hours-calculator/
+Save time information for the week.
+
+http://swaheed2.github.io/Real-Time-Work-Hours-Calculator/
