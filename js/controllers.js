@@ -2,15 +2,16 @@ var myControllers = angular.module('myApp.myControllers', []);
 
 myControllers.controller('MainCtrl', function($scope) {
 
+
     $scope.advance = true;
 
-    $scope.timeinH = 8;
+    $scope.timeinH = 0;
     $scope.timeinM = 0;
-    $scope.lstartH = 1;
+    $scope.lstartH = 0;
     $scope.lstartM = 0;
-    $scope.lendH = 2;
+    $scope.lendH = 0;
     $scope.lendM = 0;
-    $scope.timeoutH = 5;
+    $scope.timeoutH = 0;
     $scope.timeoutM = 0;
     $scope.rate = 20;
     $scope.tax  = 13;
@@ -21,13 +22,25 @@ myControllers.controller('MainCtrl', function($scope) {
     $scope.timeoutAMPM = "pm";
 
 
-    $scope.total = " ";
-    $scope.calH = 0;
-    $scope.calcM = 0;
+    $scope.weekday = new Array(7);
+    $scope.weekday[0]=  "Sun";
+    $scope.weekday[1] = "Mon";
+    $scope.weekday[2] = "Tue";
+    $scope.weekday[3] = "Wed";
+    $scope.weekday[4] = "Thu";
+    $scope.weekday[5] = "Fri";
+    $scope.weekday[6] = "Sat";
+    $scope.todayDate = new Date();
+
+    $scope.total  = " ";
+    $scope.calH   = 0;
+    $scope.calcM  = 0;
+    $scope.day    = $scope.weekday[$scope.todayDate.getDay()]; 
 
     $scope.totalHours = 0;
     $scope.tableHours = 0;
     $scope.totalPay   = ($scope.totalHours * $scope.rate) - (($scope.totalHours * $scope.rate)*$scope.tax/100);
+
 
 
 
@@ -36,7 +49,7 @@ myControllers.controller('MainCtrl', function($scope) {
         var tinDate = new Date(); 
         var tinH    = $scope.timeinH;
         var tinM    = $scope.timeinM;
-        if($scope.timeinAMPM == "pm" && tinH < 12){
+        if($scope.timeinAMPM == "pm" && tinH < 12 && tinH > 0){
             tinH += 12;
             //console.log("timein yes : " + tinH + " " + $scope.timeinAMPM);
         }
@@ -45,7 +58,7 @@ myControllers.controller('MainCtrl', function($scope) {
         var lstartDate = new Date(); 
         var lstH    = $scope.lstartH;
         var lstM    = $scope.lstartM; 
-        if($scope.lunchstartAMPM == "pm" && lstH < 12){ 
+        if($scope.lunchstartAMPM == "pm" && lstH < 12 && lstH > 0){ 
             lstH += 12;
             //console.log("lunchstart yes : " + lstH + " " + $scope.timeinAMPM);
         } 
@@ -54,7 +67,7 @@ myControllers.controller('MainCtrl', function($scope) {
         var lendDate = new Date(); 
         var lenH    = $scope.lendH;
         var lenM    = $scope.lendM; 
-        if($scope.lunchendAMPM == "pm" && lenH < 12){ 
+        if($scope.lunchendAMPM == "pm" && lenM < 12 && lenM > 0){ 
             lenH += 12;
             //console.log("timeend yes : " + lenH + " " + $scope.timeinAMPM);
         } 
@@ -63,7 +76,7 @@ myControllers.controller('MainCtrl', function($scope) {
         var toutDate = new Date(); 
         var toutH    = $scope.timeoutH;
         var toutM    = $scope.timeoutM; 
-        if($scope.timeoutAMPM == "pm"  && toutH < 12){
+        if($scope.timeoutAMPM == "pm"  && toutH < 12 && toutH > 0){
             console.log("value: " + $scope.timeoutAMPM);
             toutH += 12;
             // console.log("timeout yes : " + toutH + " " + $scope.timeinAMPM);
@@ -88,10 +101,13 @@ myControllers.controller('MainCtrl', function($scope) {
         $scope.calcTotalHours(false);
         $scope.totalPay   = ($scope.totalHours * $scope.rate) - (($scope.totalHours * $scope.rate)*$scope.tax/100);
     }
-    $scope.addRow = function(){
+    $scope.addRow = function() {
+
         console.log("add row");
         var table = $('#ttable tbody');
         var rowText = '<tr>';
+
+        rowText    += '<td class="small-col">' + $scope.day + '</td>';
 
         rowText    += '<td>' + $scope.timeinH  + ':';  
         if($scope.timeinM.toString().length == 1)
@@ -113,10 +129,13 @@ myControllers.controller('MainCtrl', function($scope) {
             rowText    += '0';
         rowText    += $scope.timeoutM  + $scope.timeoutAMPM     + '</td>';
 
-        rowText    += '<td>' + ($scope.calH + $scope.calcM) + '</td>';
+        rowText    += '<td class="small-col">' + ($scope.calH + $scope.calcM) + '</td>';
 
         rowText    += '</tr>'
         table.append(rowText); 
+
+        localStorage.setItem("table",table.html());
+
 
         //clear current times
         $scope.timeinH = 0;
@@ -129,7 +148,10 @@ myControllers.controller('MainCtrl', function($scope) {
         $scope.timeoutM = 0;
 
         // add to table hours
-        $scope.tableHours += $scope.calH + $scope.calcM;
+        $scope.tableHours = Number($scope.tableHours) +  Number($scope.calH) + Number($scope.calcM);
+
+        console.log("table hours is getting set: " + $scope.tableHours)
+        localStorage.setItem("tableHours",$scope.tableHours);
 
         //reset
         $scope.calH = 0;
@@ -140,6 +162,7 @@ myControllers.controller('MainCtrl', function($scope) {
         console.log("table hours: " + $scope.tableHours);
         $scope.calcRate();
         console.log("Rate: " + $scope.rate);
+        $scope.day++;
     }
     $scope.calcTotalHours = function(t) {
         if(t === true){ 
@@ -148,7 +171,7 @@ myControllers.controller('MainCtrl', function($scope) {
         }
         else{
             console.log("table hours inside else calcTotalHours:" + $scope.tableHours);
-            $scope.totalHours = $scope.tableHours + $scope.calH + $scope.calcM;
+            $scope.totalHours = Number($scope.tableHours) + Number($scope.calH) + Number($scope.calcM);
         } 
     }
 
@@ -177,6 +200,8 @@ myControllers.controller('MainCtrl', function($scope) {
         location.reload();
     }
     angular.element(document).ready(function () {
+
+
         if(localStorage.getItem("timeinH")  !== null){
             $scope.timeinH = parseInt(localStorage.getItem("timeinH"));
         }
@@ -207,9 +232,45 @@ myControllers.controller('MainCtrl', function($scope) {
         if(localStorage.getItem("tax")  !== null){
             $scope.tax = parseInt(localStorage.getItem("tax"));
         }
+
+        if(localStorage.getItem("table")  !== null){
+            console.log("table exists: ");
+            var table = $('#ttable tbody'); 
+            var tableArray = localStorage.getItem("table");
+            console.log(tableArray);
+            table.html(tableArray);
+        }
+
+
+
+        if(localStorage.getItem("tableHours")  !== null){  
+            var tableHours = localStorage.getItem("tableHours");
+            console.log("exists table hours is: " + tableHours)
+            $scope.tableHours = tableHours;
+        }
+        else{
+            console.log("table hours is 0")
+            localStorage.setItem("tableHours",0);
+        }
+
         $scope.calculate();
         $scope.$apply();
         console.log("init");
     });
 
 });
+
+var clearAll = function(){
+    localStorage.removeItem("tableHours");
+    localStorage.removeItem("table");
+    localStorage.removeItem("timeinH");
+    localStorage.removeItem("timeinM");
+    localStorage.removeItem("lstartH");
+    localStorage.removeItem("lstartM");
+    localStorage.removeItem("lendH");
+    localStorage.removeItem("lendM");
+    localStorage.removeItem("timeoutH");
+    localStorage.removeItem("timeoutM");
+    localStorage.removeItem("rate");
+    localStorage.removeItem("tax");
+}

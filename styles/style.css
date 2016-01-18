@@ -74,3 +74,9 @@ input::-webkit-inner-spin-button {
     font-style: bold;
     
 }
+.small-col{
+    width: 20px !important;
+}
+.highlight { 
+    background-color: red;
+}

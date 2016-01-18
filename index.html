@@ -172,7 +172,7 @@
                                         ng-click="saveCurrentHours()"
                                         class="btn btn-default btn-xs" 
                                         data-toggle="tooltip" data-placement="top" 
-                                        title="save times">
+                                        title="Save all times, rates, and tax rate">
                                     Set As Default
                                 </button>
                                 <button 
@@ -201,7 +201,7 @@
                     <span  
                           style="display: inline-block; width:45%"
                           class="bg-purple btn-flat bottom-span" >
-                        Rate
+                        Rate/Hr
                     </span>
                     <input 
                            type="number"   
@@ -215,7 +215,7 @@
                     <span  
                           style="display: inline-block; width:45%"
                           class="bg-purple btn-flat bottom-span">
-                        Tax
+                        Tax %
                     </span>
                     <input 
                            type="number"  
@@ -247,11 +247,12 @@
                         <table id="ttable" class="table table-bordered">
                             <thead class="bg-olive">
                                 <tr>
+                                    <td class="small-col">Day</td>
                                     <td>Time In</td> 
                                     <td>Lunch Start</td> 
                                     <td>Lunch End</td> 
                                     <td>Time Out</td>
-                                    <td>Hours</td>
+                                    <td class="small-col">Hours</td>
                                 </tr>
                             </thead>
                             <tbody class=""> 
@@ -263,9 +264,17 @@
             <br><br>
 
         </div>   
+
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> 
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
         <script src="js/app.js"></script>    
+
+        <script>
+            $('#ttable').on('click', 'tbody tr', function(event) {
+                $(this).addClass('highlight').siblings().removeClass('highlight');
+            });
+
+        </script>
     </body>
 </html>
