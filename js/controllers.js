@@ -105,7 +105,7 @@ myControllers.controller('MainCtrl', function($scope) {
 
         console.log("add row");
         var table = $('#ttable tbody');
-        var rowText = '<tr>';
+        var rowText = '<tr data-target="#menuModal">';
 
         rowText    += '<td class="small-col">' + $scope.day + '</td>';
 

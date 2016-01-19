@@ -16,7 +16,10 @@ body{
 .box.box-success.child{
     border-top: none;
 }
-
+tr:hover td {
+    background:#605CA8;
+    color: #fff;    
+};
 input[type="number"] {
     width:50px;
     height: 50px;
