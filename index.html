@@ -33,7 +33,7 @@
 
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script> 
-        <script src="js/controllers.js"></script>  
+
     </head>
     <body ng-app='myApp'> 
         <div class= "container" id="main-container" ng-controller="MainCtrl">
@@ -266,22 +266,22 @@
 
         </div>   
 
-        <div id="menuModal" class="modal hide fade" role="dialog" aria-labelledby="menuModalLabel" aria-hidden="true">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-                <h3>Delete</h3>
-
-            </div>
-            <div id="menuDetails" class="modal-body"></div>
-            <div id="menuItems" class="modal-body"></div>
-            <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            </div>
-        </div>
+        <div id="menuModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog text-center">
+                <div class="modal-content"> 
+                    <div class="modal-body text-danger">
+                        <button class="btn btn-danger" id="deleteRow"><i class="fa fa-trash fa-5x"></i></button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button> 
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 
         <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script> 
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
+        <script src="js/controllers.js"></script>  
         <script src="js/app.js"></script>    
 
         <script>

@@ -258,7 +258,32 @@ myControllers.controller('MainCtrl', function($scope) {
         console.log("init");
     });
 
+
+
 });
+
+
+
+$('body').on('click','tr',function(){
+    $("#menuModal").modal()
+});
+$('body').on('click','#deleteRow',function(){
+    deleteRow();
+});
+
+function openModal(){
+    $("#menuModal").modal("toggle")
+}
+
+var deleteRow = function(){
+    console.log("deleting row");
+    $("#menuModal").modal("toggle");
+ 
+}
+
+
+ 
+
 
 var clearAll = function(){
     localStorage.removeItem("tableHours");
