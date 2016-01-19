@@ -67,7 +67,7 @@ myControllers.controller('MainCtrl', function($scope) {
         var lendDate = new Date(); 
         var lenH    = $scope.lendH;
         var lenM    = $scope.lendM; 
-        if($scope.lunchendAMPM == "pm" && lenM < 12 && lenM > 0){ 
+        if($scope.lunchendAMPM == "pm" && lenH < 12 && lenH > 0){ 
             lenH += 12;
             //console.log("timeend yes : " + lenH + " " + $scope.timeinAMPM);
         } 
