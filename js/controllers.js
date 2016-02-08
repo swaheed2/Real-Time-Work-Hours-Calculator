@@ -298,4 +298,6 @@ var clearAll = function(){
     localStorage.removeItem("timeoutM");
     localStorage.removeItem("rate");
     localStorage.removeItem("tax");
+    
+    location.reload();
 }
